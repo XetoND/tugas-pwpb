@@ -2,7 +2,7 @@
 session_start();
 require_once "koneksi.php";
 
-if($_SESSION['posisi']==""){
+if($_SESSION['posisi'] != "Guru"){
   header("location:login.php");
 }
 $data = query("SELECT * FROM siswa");
@@ -38,41 +38,41 @@ $data = query("SELECT * FROM siswa");
           <h1 class="my-4">Data Siswa</h1>
           <a href="input.php" class="btn btn-outline-primary btn-lg">Input Data</a>
           <a href="logout.php" class="btn btn-outline-danger btn-lg">Logout</a>
-        <hr>
-        <table class="table table-striped table-md align-middle">
-        <thead>
-            <tr>
-                <th style="text-align:center;">No</th>
-                <th>Nama Lengkap</th>
-                <th>Jenis Kelamin</th>
-                <th>Jurusan</th>
-                <th>Nisn</th>
-                <th>Nis</th>
-                <th style="text-align:center;">Aksi</th>
-            </tr>
-          </thead>
-          <tbody>
-            <?php
-              $i = 1;
-              foreach( $data as $d ):
-            ?>
-            <tr>
-                <td style="text-align:center;"><?= $i++?></td>
-                <td><?= $d['nama_lengkap'] ?></td>
-                <td><?= $d['jenis_kelamin'] ?></td>
-                <td><?= $d['jurusan'] ?></td>
-                <td><?= $d['nis'] ?></td>
-                <td><?= $d['nisn'] ?></td>
-                <td style="text-align:center;">
-                  <a href="update.php?no=<?= $d['no'] ?>"><i class="bi bi-pencil-square"></i></a>
-                  <a onclick="return confirm('are you sure?')" href="delete.php?no=<?= $d['no'] ?>"><i class="bi bi-trash3"></i></a>
-                </td>
-            </tr>
-            <?php
-              endforeach;
-            ?>
-          </tbody>
-        </table>
+          <hr>
+          <table class="table table-striped table-md align-middle">
+          <thead>
+              <tr>
+                  <th style="text-align:center;">No</th>
+                  <th>Nama Lengkap</th>
+                  <th>Jenis Kelamin</th>
+                  <th>Jurusan</th>
+                  <th>Nisn</th>
+                  <th>Nis</th>
+                  <th style="text-align:center;">Aksi</th>
+              </tr>
+            </thead>
+            <tbody>
+              <?php
+                $i = 1;
+                foreach( $data as $d ):
+              ?>
+              <tr>
+                  <td style="text-align:center;"><?= $i++?></td>
+                  <td><?= $d['nama_lengkap'] ?></td>
+                  <td><?= $d['jenis_kelamin'] ?></td>
+                  <td><?= $d['jurusan'] ?></td>
+                  <td><?= $d['nis'] ?></td>
+                  <td><?= $d['nisn'] ?></td>
+                  <td style="text-align:center;">
+                    <a href="update.php?no=<?= $d['no'] ?>"><i class="bi bi-pencil-square"></i></a>
+                    <a onclick="return confirm('are you sure?')" href="delete.php?no=<?= $d['no'] ?>"><i class="bi bi-trash3"></i></a>
+                  </td>
+              </tr>
+              <?php
+                endforeach;
+              ?>
+            </tbody>
+          </table>
         </div>
     </body>
 </html>

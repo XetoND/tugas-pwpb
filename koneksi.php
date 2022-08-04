@@ -54,12 +54,18 @@ function update($data) {
 
 function signup($data) {
     global $host;
-    var_dump($data);
-    $email = $_POST['email'];
-    $username = $_POST['username'];
-    $password = $_POST['password'];
-    $posisi = $_POST['posisi'];
+
+    $email = $data['email'];
+    $username = $data['username'];
+    $password = $data['password'];
+    $posisi = $data['posisi'];
     $create_date = date("Y-m-d");
+
+    //pengecekan unique email
+    $validasi = query("SELECT (email) FROM user WHERE email= '$email'");
+    if ( count($validasi) > 0) {
+        return 0;
+    }
 
     mysqli_query($host, "INSERT INTO user(email,username,password,posisi,create_date)
     VALUE('$email','$username','$password','$posisi','$create_date')");

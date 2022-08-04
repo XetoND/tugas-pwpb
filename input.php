@@ -3,7 +3,7 @@ session_start();
 
 require_once "koneksi.php";
 
-  if($_SESSION['posisi']==""){
+  if($_SESSION['posisi'] != "Guru"){
     header("location:login.php");
   }
 
@@ -46,7 +46,10 @@ require_once "koneksi.php";
 
         <div class="col-md-6">
           <label for="jenis_kelamin" class="form-label">Jenis Kelamin</label>
-          <input type="text" class="form-control" name="jenis_kelamin" id="jenis_kelamin">
+          <select class="form-select form-select" aria-label=".form-select-lg example" name="jenis_kelamin">
+            <option value="Laki-laki">Laki-laki</option>
+            <option value="Perempuan">Perempuan</option>
+          </select>
         </div>
 
         <div class="col-12 my-3">

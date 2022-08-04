@@ -1,28 +1,31 @@
 <?php 
 session_start();
 require_once "koneksi.php";
-
-  if($_SESSION['posisi']==""){
+//mengecek sesion guru atau tidak
+  if($_SESSION['posisi'] != "Guru"){
     header("location:login.php");
   }
 
+//mengecek apakah no/id sudah terkirim
   if (!isset($_GET['no'])) {
     header("location:page_guru.php");
   }
 
+//mengecek apakah tombol submit sudah di tekan atau belum
   if (isset($_POST['submit'])) {
     if(update($_POST) > 0){
       echo"<script>
               alert('update data succesful');
               window.location = 'page_guru.php';
           </script>";
-  }else{
+    }else{
       echo"<script>
               alert('update data failed');
           </script>";
+    }
   }
-  }
-
+ 
+  //mengambil data lama dengan no/id dikirim
   $oldData = query("SELECT * FROM siswa WHERE no = '{$_GET['no']}'");
 ?>
 
@@ -60,7 +63,20 @@ require_once "koneksi.php";
 
         <div class="col-md-6">
           <label for="jenis_kelamin" class="form-label">Jenis Kelamin</label>
-          <input type="text" class="form-control" name="jenis_kelamin" id="jenis_kelamin" value="<?= $old['jenis_kelamin']?>">
+          <select class="form-select form-select" aria-label=".form-select-lg example" name="jenis_kelamin">
+            <?php
+              $gender = ['Laki-laki','Perempuan'];
+              foreach($gender as $g):
+              if($g == $old['jenis_kelamin']) :
+            ?>
+            <option value="<?= $g ?>" selected><?= $g ?></option>
+            <?php else:?>
+            <option value="<?= $g ?>"><?= $g ?></option>
+            <?php
+              endif;
+              endforeach;
+            ?>
+          </select>
         </div>
 
         <div class="col-12 my-3">
