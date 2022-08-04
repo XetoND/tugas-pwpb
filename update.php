@@ -1,9 +1,32 @@
 <?php 
 session_start();
-
-  if($_SESSION['posisi']==""){
+require_once "koneksi.php";
+//mengecek sesion guru atau tidak
+  if($_SESSION['posisi'] != "Guru"){
     header("location:login.php");
   }
+
+//mengecek apakah no/id sudah terkirim
+  if (!isset($_GET['no'])) {
+    header("location:page_guru.php");
+  }
+
+//mengecek apakah tombol submit sudah di tekan atau belum
+  if (isset($_POST['submit'])) {
+    if(update($_POST) > 0){
+      echo"<script>
+              alert('update data succesful');
+              window.location = 'page_guru.php';
+          </script>";
+    }else{
+      echo"<script>
+              alert('update data failed');
+          </script>";
+    }
+  }
+ 
+  //mengambil data lama dengan no/id dikirim
+  $oldData = query("SELECT * FROM siswa WHERE no = '{$_GET['no']}'");
 ?>
 
 <html lang="en">
@@ -18,86 +41,68 @@ session_start();
       *{
       font-family: "open sans";
       }
-      body{
-      background-image: linear-gradient(rgba(206,206,206,0.5),rgba(206,206,206,0.5)),url(gambar/white.jpg);
-      background-position: center;
-      background-size: cover;
-      }
-      table{
-      margin-top: 45px;
-      width: 35%;
-      box-shadow: 0 10px 32px 0 rgba( 31, 38, 135, 0.65);
-      border-radius: 10px;
-      }
-      table tr td{
-      padding: 15px 20px ;
-      }
-      h1{
-      margin-top: 25px;
-      }
       hr{
       border: none;
       height: 4px;
       background-color: #000000;
       }
-      .tombol{
-      text-align: right;
-      }
-      input{
-      width: 100%;
-      }
     </style>
 </head>
 <body>
-  <center>
-    <h1>Update Data Siswa</h1>
-  </center>
-  <div class="container-fluid">
-      <div class="tombol">
-        <a class="btn btn-outline-primary" href="index.php" role="button">Lihat Data Siswa</a>
-      </div>
-      <hr>
-  </div>
-    <?php
-    include'koneksi.php';
-    $no = $_GET['no'];
-    $data_mysql = mysqli_query($host,"SELECT*FROM siswa WHERE no='$no'")
-    or die(mysqli_error($host));
-    while($data = mysqli_fetch_array($data_mysql)) {
-    ?>
-        <center>
-            <form action="update-aksi.php"method="POST">
-                <table>
-                    <tr>
-                        <td>Nama Lengkap</td>
-                        <td>
-                          <input type="hidden"name="no"value="<?php echo$data['no']?>">
-                          <input type="text"name="nama_lengkap" placeholder="Nama Lengkap" value="<?php echo$data['nama_lengkap']?>" required>
-                        </td>
-                    </tr>
-                    <tr>
-                      <td>Jenis Kelamin</td>
-                      <td><input type="text" name="jenis_kelamin" placeholder="Jenis Kelamin " value="<?php echo$data['jenis_kelamin']?>" required></td>
-                    </tr>
-                    <tr>
-                      <td>Jurusan</td>
-                      <td><input type="text" name="jurusan" placeholder="Jurusan" value="<?php echo$data['jurusan']?>" required></td>
-                    </tr>
-                    <tr>
-                      <td>NIS</td>
-                      <td><input type="text" name="nis" placeholder="NIS" value="<?php echo$data['nis']?>" required></td>
-                    </tr>
-                    <tr>
-                      <td>NISN</td>
-                      <td><input type="text" name="nisn"placeholder="NISN" value="<?php echo$data['nisn']?>" required></td>
-                    </tr>
-                    <tr>
-                      <td></td>
-                      <td><input class="btn btn-outline-secondary" type="submit" value="Simpan"></td>
-                    </tr>
-                </table>
-              </form>
-          </center>
-        <?php } ?>
+<div class="container">
+    <form class="row" action="" method="post">
+      <?php
+        foreach($oldData as $old):
+      ?>
+        <h1 class="my-5">Update Data</h1>
+        <input type="hidden" name="no" value="<?=$old['no']?>">
+        <div class="col-md-6">
+          <label for="nama_lengkap" class="form-label">Nama</label>
+          <input type="text" class="form-control" name="nama_lengkap" id="nama_lengkap" value="<?= $old['nama_lengkap']?>">
+        </div>
+
+        <div class="col-md-6">
+          <label for="jenis_kelamin" class="form-label">Jenis Kelamin</label>
+          <select class="form-select form-select" aria-label=".form-select-lg example" name="jenis_kelamin">
+            <?php
+              $gender = ['Laki-laki','Perempuan'];
+              foreach($gender as $g):
+              if($g == $old['jenis_kelamin']) :
+            ?>
+            <option value="<?= $g ?>" selected><?= $g ?></option>
+            <?php else:?>
+            <option value="<?= $g ?>"><?= $g ?></option>
+            <?php
+              endif;
+              endforeach;
+            ?>
+          </select>
+        </div>
+
+        <div class="col-12 my-3">
+            <label for="jurusan" class="form-label">Jurusan</label>
+            <input type="text" class="form-control" name="jurusan" id="jurusan" value="<?= $old['jurusan']?>">
+        </div>
+            
+        <div class="col-md-6">
+          <label for="nis" class="form-label">NIS</label>
+          <input type="text" class="form-control" name="nis" id="nis" value="<?= $old['nis']?>">
+        </div>
+
+        <div class="col-md-6">
+          <label for="nisn" class="form-label">NISN</label>
+          <input type="text" class="form-control" name="nisn" id="nisn" value="<?= $old['nisn']?>">
+        </div>
+
+        <div class="col-1 mt-3">
+            <button type="submit" class="btn btn-primary" name="submit">Update</button>
+        </div>
+
+        <div class="col-1 mt-3">
+            <a href="page_guru.php" class="btn btn-primary">Back</a>
+        </div>
+        <?php endforeach;?>
+      </form>
+</div>
 </body>
 </html>

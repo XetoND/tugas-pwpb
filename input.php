@@ -1,8 +1,23 @@
 <?php 
 session_start();
 
-  if($_SESSION['posisi']==""){
+require_once "koneksi.php";
+
+  if($_SESSION['posisi'] != "Guru"){
     header("location:login.php");
+  }
+
+  if (isset($_POST['submit'])) {
+    if(store($_POST) > 0){
+      echo"<script>
+              alert('input data succesful');
+              window.location = 'page_guru.php';
+          </script>";
+    }else{
+      echo"<script>
+              alert('input data failed');
+          </script>";
+  }
   }
 ?>
 
@@ -14,80 +29,53 @@ session_start();
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans&family=Poppins:wght@300;400&display=swap" rel="stylesheet">
-  <style>
-    *{
-      font-family: "open sans";
-    }
-    body{
-      background-image: linear-gradient(rgba(206,206,206,0.5),rgba(206,206,206,0.5)),url(gambar/white.jpg);
-      background-position: center;
-      background-size: cover;
-    }
-    table{
-      margin-top: 45px;
-      width: 35%;
-      box-shadow: 0 10px 32px 0 rgba( 31, 38, 135, 0.65);
-      border-radius: 10px;
-    }
-    table tr td{
-      padding: 15px 20px ;
-    }
-    h1{
-      margin-top: 25px;
-    }
-    hr{
-      border: none;
-      height: 4px;
-      background-color: #000000;
-
-    }
-    .tombol{
-      text-align: right;
-    }
-    input{
-      width: 100%;
-    }
-  </style>
+    <style>
+      *{
+        font-family: "open sans";
+      }
+    </style>
 </head>
 <body>
-<center>
-    <h1>Input Data Siswa</h1>
-</center>
-<div class="container-fluid">
-    <div class="tombol">
-      <a class="btn btn-outline-primary" href="index.php" role="button">Lihat Data Siswa</a>
-    </div>
-    <hr>
-</div>
-    <center>
-      <form action="input-aksi.php"method="POST">
-          <table>
-            <tr>
-                <td>Nama Lengkap</td>
-                <td><input type="text" name="nama_lengkap" placeholder="Nama Lengkap" required></td>
-            </tr>
-            <tr>
-              <td>Jenis Kelamin</td>
-              <td><input type="text" name="jenis_kelamin" placeholder="Jenis Kelamin" required></td>
-            </tr>
-            <tr>
-                <td>Jurusan</td>
-                <td><input type="text" name="jurusan" placeholder="Jurusan" required></td>
-            </tr>
-            <tr>
-                <td>NIS</td>
-                <td><input type="text" name="nis" placeholder="NIS" required></td>
-            </tr>
-            <tr>
-                <td>NISN</td>
-                <td><input type="text" name="nisn" placeholder="NISN"></td>
-            </tr>
-            <tr>
-                <td></td>
-                <td><input class="btn btn-outline-secondary" type="submit" value="Simpan"></td>
-            </tr>
-          </table>
+<div class="container">
+    <form class="row" action="" method="post">
+        <h1 class="my-5">Input Data</h1>
+        <div class="col-md-6">
+          <label for="nama_lengkap" class="form-label">Nama</label>
+          <input type="text" class="form-control" name="nama_lengkap" id="nama_lengkap">
+        </div>
+
+        <div class="col-md-6">
+          <label for="jenis_kelamin" class="form-label">Jenis Kelamin</label>
+          <select class="form-select form-select" aria-label=".form-select-lg example" name="jenis_kelamin">
+            <option value="Laki-laki">Laki-laki</option>
+            <option value="Perempuan">Perempuan</option>
+          </select>
+        </div>
+
+        <div class="col-12 my-3">
+            <label for="jurusan" class="form-label">Jurusan</label>
+            <input type="text" class="form-control" name="jurusan" id="jurusan">
+        </div>
+            
+        <div class="col-md-6">
+          <label for="nis" class="form-label">NIS</label>
+          <input type="text" class="form-control" name="nis" id="nis">
+        </div>
+
+        <div class="col-md-6">
+          <label for="nisn" class="form-label">NISN</label>
+          <input type="text" class="form-control" name="nisn" id="nisn">
+        </div>
+
+        <div class="col-1 mt-3">
+            <button type="submit" class="btn btn-primary" name="submit">Input</button>
+        </div>
+
+        <div class="col-1 mt-3">
+            <a href="page_guru.php" class="btn btn-primary">Back</a>
+        </div>
+    
       </form>
-    </center>
+</div>
 </body>
 </html>

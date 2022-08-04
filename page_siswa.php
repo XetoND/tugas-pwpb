@@ -1,9 +1,13 @@
 <?php 
 session_start();
 
+require_once "koneksi.php";
+
   if($_SESSION['posisi']==""){
     header("location:login.php");
   }
+
+  $data = query("SELECT * FROM siswa");
 ?>
 
 <!DOCTYPE html>
@@ -19,11 +23,6 @@ session_start();
             *{
               font-family: "open sans";
             }
-            body{
-              background-image: linear-gradient(rgba(206,206,206,0.5),rgba(206,206,206,0.5)),url(gambar/white.jpg);
-              background-position: center;
-	            background-size: cover;
-            }
             h1{
               margin-top: 30px;
             }
@@ -32,60 +31,42 @@ session_start();
               height: 4px;
               background-color: #000;
             }
-            table.table tr th,
-            table.table tr td{
-              padding: 10px 20px ;
-            }
-            .tombol{
-              text-align: right;
-            }
-            td a{
-              text-decoration: none;
-              color: #000;
-            }
-            i{
-              font-style: normal;
-            }
         </style>
     </head>
     <body>
-        <div class="container-fluid">
-        <center>
-        <h1>Data Siswa</h1>
-        </center>
-        <div class="tombol">
-        <a class="btn btn-outline-danger" href="logout.php" role="button">Log out</a>
+    <div class="container">
+          <h1 class="my-4">Data Siswa</h1>
+          <a href="logout.php" class="btn btn-outline-danger btn-lg">Logout</a>
+          <hr>
+          <table class="table table-striped table-md align-middle">
+          <thead>
+              <tr>
+                  <th style="text-align:center;">No</th>
+                  <th>Nama Lengkap</th>
+                  <th>Jenis Kelamin</th>
+                  <th>Jurusan</th>
+                  <th>Nisn</th>
+                  <th>Nis</th>
+              </tr>
+            </thead>
+            <tbody>
+              <?php
+                $i = 1;
+                foreach( $data as $d ):
+              ?>
+              <tr>
+                  <td style="text-align:center;"><?= $i++?></td>
+                  <td><?= $d['nama_lengkap'] ?></td>
+                  <td><?= $d['jenis_kelamin'] ?></td>
+                  <td><?= $d['jurusan'] ?></td>
+                  <td><?= $d['nis'] ?></td>
+                  <td><?= $d['nisn'] ?></td>
+              </tr>
+              <?php
+                endforeach;
+              ?>
+            </tbody>
+          </table>
         </div>
-        <hr>
-        <br>
-      <center>
-        
-        <table class="table table-secondary table-striped-columns">
-            <tr>
-                <th style="text-align:center;">No</th>
-                <th>Nama Lengkap</th>
-                <th>Jenis Kelamin</th>
-                <th>Jurusan</th>
-                <th>Nisn</th>
-                <th>Nis</th>
-            </tr>
-            <?php
-            include "koneksi.php";
-            $data_mysql = mysqli_query($host, "SELECT*FROM siswa");
-            $nomor = 1;
-            while ($data = mysqli_fetch_assoc($data_mysql)) {
-            ?>
-            <tr>
-                <td style="text-align:center;"><?php echo $nomor++?></td>
-                <td><?php echo $data['nama_lengkap'] ?></td>
-                <td><?php echo $data['jenis_kelamin'] ?></td>
-                <td><?php echo $data['jurusan'] ?></td>
-                <td><?php echo $data['nis'] ?></td>
-                <td><?php echo $data['nisn'] ?></td>
-            </tr>
-            <?php } ?>
-        </table>
-        </div>
-      </center>
     </body>
 </html>
