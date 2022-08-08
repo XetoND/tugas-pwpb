@@ -1,4 +1,4 @@
-<?php 
+<?php
 session_start();
 require_once "koneksi.php";
 //mengecek sesion guru atau tidak
@@ -24,7 +24,7 @@ require_once "koneksi.php";
           </script>";
     }
   }
- 
+
   //mengambil data lama dengan no/id dikirim
   $oldData = query("SELECT * FROM siswa WHERE no = '{$_GET['no']}'");
 ?>
@@ -44,6 +44,7 @@ require_once "koneksi.php";
       hr{
       border: none;
       height: 4px;
+      width: 50px;
       background-color: #000000;
       }
     </style>
@@ -83,7 +84,7 @@ require_once "koneksi.php";
             <label for="jurusan" class="form-label">Jurusan</label>
             <input type="text" class="form-control" name="jurusan" id="jurusan" value="<?= $old['jurusan']?>">
         </div>
-            
+
         <div class="col-md-6">
           <label for="nis" class="form-label">NIS</label>
           <input type="text" class="form-control" name="nis" id="nis" value="<?= $old['nis']?>">

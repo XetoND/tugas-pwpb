@@ -20,11 +20,11 @@ function store($data) {
     $nis = $data['nis'];
     $nisn = $data['nisn'];
 
-    $query = "INSERT INTO siswa(nama_lengkap,jenis_kelamin,jurusan,nis,nisn) 
+    $query = "INSERT INTO siswa(nama_lengkap,jenis_kelamin,jurusan,nis,nisn)
         VALUES ('$nama_lengkap','$jenis_kelamin','$jurusan','$nis','$nisn')
                  ";
     mysqli_query($host,$query);
-    
+
     return mysqli_affected_rows($host);
 
 }
@@ -38,7 +38,7 @@ function update($data) {
     $jurusan = $data['jurusan'];
     $nis = $data['nis'];
     $nisn = $data['nisn'];
-    
+
     $query = "UPDATE siswa
                 SET nama_lengkap='$nama_lengkap',
                     jenis_kelamin='$jenis_kelamin' ,
@@ -72,4 +72,3 @@ function signup($data) {
 
     return mysqli_affected_rows($host);
 }
-

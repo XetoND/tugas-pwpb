@@ -1,6 +1,6 @@
 <?php
 session_start();
-  
+
 require_once "koneksi.php";
 
 if (isset($_POST['submit'])) {
@@ -38,7 +38,7 @@ if (isset($_POST['submit'])) {
     .form-signin .checkbox {
       font-weight: 400;
     }
-  
+
     .form-signin .form-floating:focus-within {
       z-index: 2;
     }
@@ -50,18 +50,18 @@ if (isset($_POST['submit'])) {
     .form-signin input{
       margin-top: 7px;
     }
-  
+
     .form-signin input[type="email"] {
       border-bottom-right-radius: 0;
       border-bottom-left-radius: 0;
     }
-  
+
     .form-signin input[type="password"] {
       border-top-left-radius: 0;
       border-top-right-radius: 0;
     }
 
-  
+
   </style>
 </head>
 <body>
@@ -73,7 +73,7 @@ if (isset($_POST['submit'])) {
             <input type="email" class="form-control" name="email" id="floatingEmail" placeholder="Email">
             <label for="floatingEmail" >Email</label>
         </div>
-        
+
 
         <div class="form-floating">
             <input type="text" class="form-control" name="username" id="floatingUsername" placeholder="Username">
@@ -88,7 +88,7 @@ if (isset($_POST['submit'])) {
         <select class="form-select form-select mb-3" aria-label=".form-select-lg example" name="posisi">
             <option selected>Posisi</option>
             <option value="Guru">Guru</option>
-            <option value="Siswa">Siswa</option>
+            <option value="Murid">Murid</option>
         </select>
 
         <button class="buttonrslg w-100 btn btn-lg btn-primary" type="submit" name="submit" >Sign in</button>

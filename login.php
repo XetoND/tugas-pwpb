@@ -1,18 +1,18 @@
 <?php
   session_start();
-  
+
   require_once "koneksi.php";
 
   if (isset($_POST['submit'])) {
+
     $username = $_POST['username'];
     $password = $_POST['password'];
 
     $login = mysqli_query($host,"SELECT * FROM user WHERE username='$username' and password='$password'");
     $cek = mysqli_num_rows($login);
-
+    $data = mysqli_fetch_assoc($login);
 
     if($cek>0){
-        $data = mysqli_fetch_assoc($login);
         if($data['posisi']=="Guru"){
             $_SESSION['username'] = $username;
             $_SESSION['password'] = $password;
@@ -21,33 +21,33 @@
             header("location:page_guru.php");
         }
 
-        else if($data['posisi']=="Siswa"){
+        else if($data['posisi']=="Murid"){
             $_SESSION['username'] = $username;
             $_SESSION['password'] = $password;
-            $_SESSION['posisi'] = "Siswa";
+            $_SESSION['posisi'] = "Murid";
 
             header("location:page_siswa.php");
         }
 
         else{
             echo "
-            <script> 
+            <script>
                 alert('Data Gagal');
                 window.location = 'login.php'
             </script>";
         }
     }
     else{
-        echo "<script> 
+        echo "<script>
                 alert('Data Gagal');
                 window.location = 'login.php'
             </script>";
-        
-        
+
+
     }
     }
 
-  
+
 
 ?>
 
@@ -72,7 +72,7 @@
       .form-signin .checkbox {
         font-weight: 400;
       }
-    
+
       .form-signin .form-floating:focus-within {
         z-index: 2;
       }
@@ -84,18 +84,16 @@
       .form-signin input{
         margin-top: 7px;
       }
-    
+
       .form-signin input[type="email"] {
         border-bottom-right-radius: 0;
         border-bottom-left-radius: 0;
       }
-    
+
       .form-signin input[type="password"] {
         border-top-left-radius: 0;
         border-top-right-radius: 0;
       }
-
-  
     </style>
 </head>
 <body>
@@ -115,11 +113,6 @@
             <label for="floatingPassword">Password</label>
         </div>
 
-        <select class="form-select form-select mb-3" aria-label=".form-select-lg example" name="posisi">
-            <option selected>Posisi</option>
-            <option value="Guru">Guru</option>
-            <option value="Siswa">Siswa</option>
-        </select>
 
         <button class="buttonrslg w-100 btn btn-lg btn-primary" type="submit" name="submit">Login</button>
         <p class="mt-2 mb-3 text-muted text-center">Doesn't have account <a href="sign-up.php">Register</a></p>

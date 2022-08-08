@@ -1,4 +1,4 @@
-<?php 
+<?php
 session_start();
 require_once "koneksi.php";
 
@@ -64,8 +64,8 @@ $data = query("SELECT * FROM siswa");
                   <td><?= $d['nis'] ?></td>
                   <td><?= $d['nisn'] ?></td>
                   <td style="text-align:center;">
-                    <a href="update.php?no=<?= $d['no'] ?>"><i class="bi bi-pencil-square"></i></a>
-                    <a onclick="return confirm('are you sure?')" href="delete.php?no=<?= $d['no'] ?>"><i class="bi bi-trash3"></i></a>
+                    <a href="update.php?no=<?= $d['no'] ?>"><i class="bi bi-pencil-square btn btn-warning btn-sm"></i></a>
+                    <a onclick="return confirm('are you sure?')" href="delete.php?no=<?= $d['no'] ?>"><i class="bi bi-trash3-fill btn btn-danger btn-sm"></i></a>
                   </td>
               </tr>
               <?php

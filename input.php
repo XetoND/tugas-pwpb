@@ -1,10 +1,10 @@
-<?php 
+<?php
 session_start();
 
 require_once "koneksi.php";
 
   if($_SESSION['posisi'] != "Guru"){
-    header("location:login.php");
+    header("location:login_php");
   }
 
   if (isset($_POST['submit'])) {
@@ -56,7 +56,7 @@ require_once "koneksi.php";
             <label for="jurusan" class="form-label">Jurusan</label>
             <input type="text" class="form-control" name="jurusan" id="jurusan">
         </div>
-            
+
         <div class="col-md-6">
           <label for="nis" class="form-label">NIS</label>
           <input type="text" class="form-control" name="nis" id="nis">
@@ -74,8 +74,8 @@ require_once "koneksi.php";
         <div class="col-1 mt-3">
             <a href="page_guru.php" class="btn btn-primary">Back</a>
         </div>
-    
-      </form>
+
+      <form>
 </div>
 </body>
 </html>

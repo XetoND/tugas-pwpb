@@ -1,9 +1,9 @@
-<?php 
+<?php
 session_start();
 
 require_once "koneksi.php";
 
-  if($_SESSION['posisi']==""){
+  if($_SESSION['posisi'] !="Murid"){
     header("location:login.php");
   }
 
@@ -24,7 +24,7 @@ require_once "koneksi.php";
               font-family: "open sans";
             }
             h1{
-              margin-top: 30px;
+              margin-top: 100px;
             }
             hr{
               border: none;
