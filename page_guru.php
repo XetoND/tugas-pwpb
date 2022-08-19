@@ -31,6 +31,10 @@ $data = query("SELECT * FROM siswa");
               text-decoration: none;
               color: #000;
             }
+            .foto{
+              width: 7em;
+              height: auto;
+            }
         </style>
     </head>
     <body>
@@ -48,6 +52,7 @@ $data = query("SELECT * FROM siswa");
                   <th>Jurusan</th>
                   <th>Nisn</th>
                   <th>Nis</th>
+                  <th>Foto Siswa</th>
                   <th style="text-align:center;">Aksi</th>
               </tr>
             </thead>
@@ -63,6 +68,9 @@ $data = query("SELECT * FROM siswa");
                   <td><?= $d['jurusan'] ?></td>
                   <td><?= $d['nis'] ?></td>
                   <td><?= $d['nisn'] ?></td>
+                  <td>
+                    <img class="foto" src="img/<?= $d['gambar']?>">
+                  </td>
                   <td style="text-align:center;">
                     <a href="update.php?no=<?= $d['no'] ?>"><i class="bi bi-pencil-square btn btn-warning btn-sm"></i></a>
                     <a onclick="return confirm('are you sure?')" href="delete.php?no=<?= $d['no'] ?>"><i class="bi bi-trash3-fill btn btn-danger btn-sm"></i></a>
