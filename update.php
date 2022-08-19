@@ -27,6 +27,7 @@ require_once "koneksi.php";
 
   //mengambil data lama dengan no/id dikirim
   $oldData = query("SELECT * FROM siswa WHERE no = '{$_GET['no']}'");
+
 ?>
 
 <html lang="en">
@@ -51,7 +52,7 @@ require_once "koneksi.php";
 </head>
 <body>
 <div class="container">
-    <form class="row" action="" method="post">
+    <form class="row" action="" method="post" enctype="multipart/form-data">
       <?php
         foreach($oldData as $old):
       ?>
@@ -95,16 +96,18 @@ require_once "koneksi.php";
           <input type="text" class="form-control" name="nisn" id="nisn" value="<?= $old['nisn']?>">
         </div>
 
-        <div class="col-md-12">
-          <label for="gambar" class="form-label">FOTO SISWA</label>
+        <div class="col-md-12 my-3">
+          <label for="gambar" class="form-label">Foto Siswa</label>
+          <input type="hidden" name="oldGambar" value="<?= $old['gambar']?>">
           <input type="file" class="form-control" name="gambar" id="gambar">
+          <img src="img/<?= $old['gambar']?>" class="img-preview img-fluid my-3 col-sm-2 d-block">
         </div>
 
-        <div class="col-1 mt-3">
+        <div class="col-md-1 mt-3">
             <button type="submit" class="btn btn-primary" name="submit">Update</button>
         </div>
 
-        <div class="col-1 mt-3">
+        <div class="col-md-1 mt-3">
             <a href="page_guru.php" class="btn btn-primary">Back</a>
         </div>
         <?php endforeach;?>

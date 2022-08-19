@@ -42,8 +42,7 @@ function upload(){
 
     if($error === 4){
       echo"<script>
-            alert('Anda Belum Memasukan Gambar!!! &#128544;
-')
+            alert('Anda Belum Memasukan Gambar!!! &#128544;')
       </script>";
       return false;
     }
@@ -53,7 +52,7 @@ function upload(){
     $ekstensiGambar = strtolower(end($ekstensiGambar));
     if(!in_array($ekstensiGambar, $ekstensiFile)){
       echo"<script>
-            alert('Yang Anda Upload Gambar!!!')
+            alert('Yang Anda bukan Upload Gambar!!!')
             </script>";
       return false;
     }
@@ -73,7 +72,6 @@ function upload(){
     return $nameFileNew;
 }
 
-
 function update($data) {
     global $host;
 
@@ -83,13 +81,23 @@ function update($data) {
     $jurusan = $data['jurusan'];
     $nis = $data['nis'];
     $nisn = $data['nisn'];
+    $gambar = $data['oldGambar'];
+
+    if ($_FILES['gambar']['error'] !== 4){
+        $gambar = upload();
+    }
+
+    if (!$gambar) {
+        return false;
+    }
 
     $query = "UPDATE siswa
                 SET nama_lengkap='$nama_lengkap',
                     jenis_kelamin='$jenis_kelamin' ,
                     jurusan='$jurusan',
                     nis='$nis',
-                    nisn='$nisn'
+                    nisn='$nisn',
+                    gambar='$gambar'
                 WHERE no='$no'";
 
     mysqli_query($host, $query);
