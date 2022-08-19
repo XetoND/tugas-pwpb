@@ -20,14 +20,59 @@ function store($data) {
     $nis = $data['nis'];
     $nisn = $data['nisn'];
 
-    $query = "INSERT INTO siswa(nama_lengkap,jenis_kelamin,jurusan,nis,nisn)
-        VALUES ('$nama_lengkap','$jenis_kelamin','$jurusan','$nis','$nisn')
+    $gambar = upload();
+    if(!$gambar){
+      return false;
+    }
+
+    $query = "INSERT INTO siswa(nama_lengkap,jenis_kelamin,jurusan,nis,nisn,gambar)
+        VALUES ('$nama_lengkap','$jenis_kelamin','$jurusan','$nis','$nisn','$gambar')
                  ";
     mysqli_query($host,$query);
 
     return mysqli_affected_rows($host);
 
 }
+
+function upload(){
+    $nameFile =$_FILES["gambar"]["name"];
+    $sizeFile =$_FILES["gambar"]["size"];
+    $error =$_FILES["gambar"]["error"];
+    $tmpName =$_FILES["gambar"]["tmp_name"];
+
+    if($error === 4){
+      echo"<script>
+            alert('Anda Belum Memasukan Gambar!!! &#128544;
+')
+      </script>";
+      return false;
+    }
+
+    $ekstensiFile = ['jpg','jpeg','png'];
+    $ekstensiGambar = explode('.',$nameFile);
+    $ekstensiGambar = strtolower(end($ekstensiGambar));
+    if(!in_array($ekstensiGambar, $ekstensiFile)){
+      echo"<script>
+            alert('Yang Anda Upload Gambar!!!')
+            </script>";
+      return false;
+    }
+
+    if($sizeFile > 3000000 ){
+      echo"<script>
+            alert('Ukuran Gambar Terlalu Besar!!!')
+      </script>";
+      return false;
+    }
+
+    $nameFileNew = uniqid();
+    $nameFileNew .= '.';
+    $nameFileNew .= $ekstensiGambar;
+
+    move_uploaded_file($tmpName,'img/'.$nameFileNew);
+    return $nameFileNew;
+}
+
 
 function update($data) {
     global $host;

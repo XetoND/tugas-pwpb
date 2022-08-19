@@ -95,6 +95,11 @@ require_once "koneksi.php";
           <input type="text" class="form-control" name="nisn" id="nisn" value="<?= $old['nisn']?>">
         </div>
 
+        <div class="col-md-12">
+          <label for="gambar" class="form-label">FOTO SISWA</label>
+          <input type="file" class="form-control" name="gambar" id="gambar">
+        </div>
+
         <div class="col-1 mt-3">
             <button type="submit" class="btn btn-primary" name="submit">Update</button>
         </div>

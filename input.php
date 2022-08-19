@@ -37,7 +37,7 @@ require_once "koneksi.php";
 </head>
 <body>
 <div class="container">
-    <form class="row" action="" method="post">
+    <form class="row" action="" method="post" enctype="multipart/form-data">
         <h1 class="my-5">Input Data</h1>
         <div class="col-md-6">
           <label for="nama_lengkap" class="form-label">Nama</label>
@@ -65,6 +65,11 @@ require_once "koneksi.php";
         <div class="col-md-6">
           <label for="nisn" class="form-label">NISN</label>
           <input type="text" class="form-control" name="nisn" id="nisn">
+        </div>
+
+        <div class="col-md-12">
+          <label for="gambar" class="form-label">FOTO SISWA</label>
+          <input type="file" class="form-control" name="gambar" id="gambar">
         </div>
 
         <div class="col-1 mt-3">
