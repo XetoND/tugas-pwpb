@@ -4,7 +4,7 @@ session_start();
 require_once "koneksi.php";
 
   if($_SESSION['posisi'] != "Guru"){
-    header("location:login_php");
+    header("location:login.php");
   }
 
   if (isset($_POST['submit'])) {
@@ -67,8 +67,8 @@ require_once "koneksi.php";
           <input type="text" class="form-control" name="nisn" id="nisn">
         </div>
 
-        <div class="col-md-12">
-          <label for="gambar" class="form-label">FOTO SISWA</label>
+        <div class="col-md-12 my-3">
+          <label for="gambar" class="form-label">Foto Siswa</label>
           <input type="file" class="form-control" name="gambar" id="gambar">
         </div>
 

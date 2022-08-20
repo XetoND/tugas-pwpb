@@ -31,6 +31,10 @@ require_once "koneksi.php";
               height: 4px;
               background-color: #000;
             }
+            .foto{
+              width: 7em;
+              height: auto;
+            }
         </style>
     </head>
     <body>
@@ -47,6 +51,7 @@ require_once "koneksi.php";
                   <th>Jurusan</th>
                   <th>Nisn</th>
                   <th>Nis</th>
+                  <th>Foto Siswa</th>
               </tr>
             </thead>
             <tbody>
@@ -61,6 +66,9 @@ require_once "koneksi.php";
                   <td><?= $d['jurusan'] ?></td>
                   <td><?= $d['nis'] ?></td>
                   <td><?= $d['nisn'] ?></td>
+                  <td>
+                    <img class="foto" src="img/<?= $d['gambar']?>">
+                  </td>
               </tr>
               <?php
                 endforeach;
