@@ -27,6 +27,12 @@ $data = query("SELECT * FROM siswa");
               height: 4px;
               background-color: #000;
             }
+            td{
+              text-align: center;
+            }
+            th{
+              text-align: center;
+            }
             td a{
               text-decoration: none;
               color: #000;
@@ -52,7 +58,7 @@ $data = query("SELECT * FROM siswa");
                   <th>Jurusan</th>
                   <th>Nisn</th>
                   <th>Nis</th>
-                  <th>Foto Siswa</th>
+                  <th style="text-align:center;">Foto Siswa</th>
                   <th style="text-align:center;">Aksi</th>
               </tr>
             </thead>
