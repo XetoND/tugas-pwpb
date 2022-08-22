@@ -42,7 +42,7 @@ function upload(){
 
     if($error === 4){
       echo"<script>
-            alert('Anda Belum Memasukan Gambar!!! &#128544;')
+            alert('Anda Belum Memasukan Gambar!!!')
       </script>";
       return false;
     }
