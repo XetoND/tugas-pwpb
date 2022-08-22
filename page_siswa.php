@@ -26,6 +26,12 @@ require_once "koneksi.php";
             h1{
               margin-top: 100px;
             }
+            td{
+              text-align: center;
+            }
+            th{
+              text-align: center;
+            }
             hr{
               border: none;
               height: 4px;
@@ -40,9 +46,9 @@ require_once "koneksi.php";
     <body>
     <div class="container">
           <h1 class="my-4">Data Siswa</h1>
-          <a href="logout.php" class="btn btn-outline-danger btn-lg">Logout</a>
+          <a href="logout.php" class="btn btn-outline-danger btn-lg">Log out</a>
           <hr>
-          <table class="table table-striped table-md align-middle">
+          <table class="table table-bordered border-dark table-md align-middle">
           <thead>
               <tr>
                   <th style="text-align:center;">No</th>
