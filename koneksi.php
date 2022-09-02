@@ -11,6 +11,23 @@ function query($query){
     return $rows;
 }
 
+function lapor($data){
+  global $host;
+
+  $nama_siswa = $data['nama_siswa'];
+  $nis_siswa = $data['nis_siswa'];
+  $tanggal_laporan = $data['tanggal_laporan'];
+  $laporan_masalah = $data['laporan_masalah'];
+
+  $query = "INSERT INTO laporan(nama_siswa, nis_siswa, tanggal_laporan, laporan_masalah)
+            VALUES ('$nama_siswa', '$nis_siswa', '$tanggal_laporan', '$laporan_masalah')";
+
+  mysqli_query($host, $query);
+
+  return mysqli_affected_rows($host);
+}
+
+
 function store($data) {
     global $host;
 

@@ -1,19 +1,18 @@
 <?php
 session_start();
-
 require_once "koneksi.php";
 
-  if($_SESSION['posisi'] !="Murid"){
-    header("location:login.php");
-  }
+if($_SESSION['posisi'] !="Guru"){
+  header("location:login.php");
+}
+$data = query("SELECT * FROM laporan");
 
-  $data = query("SELECT * FROM siswa");
 ?>
 
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        <title>Data Siswa</title>
+        <title>Data Laporan Masalah Siswa</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
@@ -23,8 +22,10 @@ require_once "koneksi.php";
             *{
               font-family: "open sans";
             }
-            h1{
-              margin-top: 100px;
+            hr{
+              border: none;
+              height: 4px;
+              background-color: #000;
             }
             td{
               text-align: center;
@@ -32,10 +33,9 @@ require_once "koneksi.php";
             th{
               text-align: center;
             }
-            hr{
-              border: none;
-              height: 4px;
-              background-color: #000;
+            td a{
+              text-decoration: none;
+              color: #000;
             }
             .foto{
               width: 7em;
@@ -44,9 +44,9 @@ require_once "koneksi.php";
         </style>
     </head>
     <body>
-    <div class="container">
-          <h1 class="my-4">Data Siswa</h1>
-          <a href="form_laporan.php" class="btn btn-outline-primary btn-lg">Buat Laporan</a>
+        <div class="container">
+          <h1 class="my-4">Laporan Masalah Siswa</h1>
+          <a href="input.php" class="btn btn-outline-primary btn-lg">Input Data</a>
           <a href="logout.php" class="btn btn-outline-danger btn-lg">Log out</a>
           <hr>
           <table class="table table-bordered border-dark table-md align-middle">
@@ -54,11 +54,10 @@ require_once "koneksi.php";
               <tr>
                   <th style="text-align:center;">No</th>
                   <th>Nama Lengkap</th>
-                  <th>Jenis Kelamin</th>
-                  <th>Jurusan</th>
-                  <th>Nisn</th>
                   <th>Nis</th>
-                  <th>Foto Siswa</th>
+                  <th>Tanggal Laporan</th>
+                  <th>Isi Laporan</th>
+                  <th style="text-align:center;">Aksi</th>
               </tr>
             </thead>
             <tbody>
@@ -68,13 +67,13 @@ require_once "koneksi.php";
               ?>
               <tr>
                   <td style="text-align:center;"><?= $i++?></td>
-                  <td><?= $d['nama_lengkap'] ?></td>
-                  <td><?= $d['jenis_kelamin'] ?></td>
-                  <td><?= $d['jurusan'] ?></td>
-                  <td><?= $d['nis'] ?></td>
-                  <td><?= $d['nisn'] ?></td>
-                  <td>
-                    <img class="foto" src="img/<?= $d['gambar']?>">
+                  <td><?= $d['nama_siswa'] ?></td>
+                  <td><?= $d['nis_siswa'] ?></td>
+                  <td><?= $d['tanggal_laporan'] ?></td>
+                  <td><?= $d['laporan_masalah'] ?></td>
+                  <td style="text-align:center;">
+                    <a href=""><i class="bi bi-pencil-square btn btn-warning btn-sm"></i></a>
+                    <a onclick="" href=""><i class="bi bi-trash3-fill btn btn-danger btn-sm"></i></a>
                   </td>
               </tr>
               <?php
